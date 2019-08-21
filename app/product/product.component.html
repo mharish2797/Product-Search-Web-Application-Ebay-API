@@ -1,0 +1,46 @@
+
+  <ng-template 
+  *ngIf="!rec;then trueblock; else falseblock">
+ </ng-template>
+ 
+ <ng-template #trueblock>
+   <br>
+   <app-norecords></app-norecords>
+ </ng-template>
+ 
+ <ng-template #falseblock>
+  <table class='table table-striped table-dark all_table'>
+    
+      <tr *ngIf="item_detail.hasOwnProperty('pic_url')" >
+    <td style="width:40%">Product Images</td> 
+    <td><a (click)="modalopener()" >View Product Images Here </a></td>
+     </tr>
+    
+    <tr *ngIf="item_detail.hasOwnProperty('subtitle')" >
+      <td style="width:40%">Subtitle</td>
+      <td>{{item_detail.subtitle}}</td>
+    </tr>
+    
+    <tr *ngIf="item_detail.hasOwnProperty('price')">
+        <td style="width:40%">Price</td>
+        <td>${{item_detail.price}}</td>
+      </tr>
+    
+      <tr *ngIf="item_detail.hasOwnProperty('location')" >
+          <td style="width:40%">Location</td>
+          <td>{{item_detail.location}}</td>
+        </tr>
+    
+        <tr *ngIf="item_detail.hasOwnProperty('return_policy')">
+            <td style="width:40%">Return Policy</td>
+            <td>{{item_detail.return_policy}}</td>
+          </tr>
+    
+          <tr *ngFor="let each_item of item_detail.itemspecifics">
+              <td style="width:40%">{{each_item.name}}</td>
+              <td>{{each_item.value}}</td>
+            </tr>
+        
+      </table>
+        
+      </ng-template>

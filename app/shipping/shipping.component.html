@@ -1,0 +1,73 @@
+<ng-template 
+ *ngIf="!rec;then tb; else fb">
+</ng-template>
+
+<ng-template #tb>
+  <br>
+  <app-norecords></app-norecords>
+</ng-template>
+
+<ng-template #fb>
+<table class='table table-striped table-dark all_table'>
+    
+    <tr *ngIf="item_detail.hasOwnProperty('cost')" >
+  <td style="width:50%">Shipping Cost</td> 
+  <td>{{item_detail.cost}}</td>
+   </tr>
+  
+   <tr *ngIf="item_detail.hasOwnProperty('shipToLocations')" >
+      <td style="width:50%">Shipping Locations</td> 
+      <td>{{item_detail.shipToLocations[0]}}</td>
+       </tr>
+
+    <tr *ngIf="item_detail.hasOwnProperty('handlingTime')" >
+      <td style="width:50%">Handling Time</td> 
+      <td>{{item_detail.handlingTime}}</td>
+        </tr>
+
+
+    <tr *ngIf="item_detail.hasOwnProperty('expeditedShipping')" >
+      <td style="width:50%">Expedited Shipping </td> 
+      <td>
+          <ng-template 
+          *ngIf="item_detail.expeditedShipping[0]=='true';then trueblock; else falseblock">
+        </ng-template>
+
+      </td>
+        </tr>
+
+
+      <tr *ngIf="item_detail.hasOwnProperty('oneDayShippingAvailable')" >
+        <td style="width:50%">One Day Shipping</td> 
+        <td>
+          
+            <ng-template 
+            *ngIf="item_detail.oneDayShippingAvailable[0]=='true';then trueblock; else falseblock">
+          </ng-template>
+          
+        </td>
+          </tr>
+
+      <tr *ngIf="item_detail.hasOwnProperty('return')" >
+          <td style="width:50%"> Return Accepted</td> 
+          <td>
+              <ng-template 
+              *ngIf="item_detail.return=='true';then trueblock; else falseblock">
+            </ng-template>
+
+          </td>
+            </tr>
+      
+      
+    </table>
+
+
+    <ng-template #trueblock>
+        <i class="material-icons green">done</i>
+      </ng-template>
+      
+      <ng-template #falseblock>
+          <i class="material-icons red">clear</i>
+      </ng-template>
+      
+      </ng-template>

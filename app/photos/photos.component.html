@@ -1,0 +1,21 @@
+<ng-template 
+ *ngIf="item_detail.length==0;then trueblock; else falseblock">
+</ng-template>
+
+<ng-template #trueblock>
+  <br>
+  <app-norecords></app-norecords>
+</ng-template>
+
+<ng-template #falseblock>
+<br>
+<div class="card-columns " >
+  
+  <div  *ngFor="let item of item_detail" >
+    <div class="card borderer" [class.d-none]="item==''">
+      <a href="{{item}}" target="_blank"><img class="card-img " src="{{item}}" alt="N/A"></a>
+    </div>
+    </div>
+  
+</div>
+</ng-template>

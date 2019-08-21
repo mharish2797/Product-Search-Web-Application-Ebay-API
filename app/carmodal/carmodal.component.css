@@ -1,0 +1,15 @@
+.borderer{
+    border: 6px solid black;
+    border-radius: 2;
+}
+
+a:hover{
+    border: 0px solid black;
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon{
+    background-color: black
+}
+
+
+  

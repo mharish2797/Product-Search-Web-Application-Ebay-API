@@ -1,0 +1,46 @@
+
+
+.all_table{
+    width:100%;
+    margin: 0 auto;
+    margin-top:10px;
+}
+
+
+.title:hover{
+    text-decoration: underline;
+    cursor: text;
+}
+
+a {
+    color: teal;
+    text-decoration: none;
+}
+
+.green{
+    color:greenyellow;
+}
+
+.red{
+    color:red;
+}
+  .text{
+      position: relative;
+      z-index: 1;
+      font-size: 14px;
+      margin-top:0;
+  padding-top:0
+  }
+
+  .progressor{
+    position: absolute;
+    left: 0;
+  top: 0;
+  margin-top:0;
+  padding-top:0;
+  transform: translate(-10%,-20%);
+  -ms-transform: translate(-10%,-20%);
+  }
+  
+
+

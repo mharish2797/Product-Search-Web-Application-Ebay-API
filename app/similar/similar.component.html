@@ -1,0 +1,63 @@
+
+<ng-template 
+*ngIf="similar_list.length==0;then trueblock; else falseblock">
+</ng-template>
+
+<ng-template #trueblock>
+ <br>
+ <app-norecords></app-norecords>
+</ng-template>
+
+<ng-template #falseblock>
+
+<form  [formGroup]="form">
+<table class="spaner">
+  <tr>
+    
+    <td >
+        <select (change)="onCategory()" size=0 formControlName="category_control" class="form-control " >
+            <option *ngFor="let citem of category_list;index as i" [value]=i> {{citem}} </option>
+        </select>
+    </td>
+
+    <td>
+        <select (change)="onOrder()"  size=0 formControlName="sort_control" class="form-control" >
+            <option *ngFor="let sitem of sort_order; index as j" [value]=j> {{sitem}} </option>
+        </select>
+    </td>
+  </tr>
+</table>
+        
+</form>
+
+       <table class='table all_table'>
+  
+          <tr class="bg-dark mt-5" *ngFor="let item of similar_list; index as k " [class.d-none]="k>4 && show_more">
+          
+          <td ><img height=120 width=120 src="{{item.image}}" ></td>
+         
+          <td >
+              <a href="{{item.url}}"target="_blank">{{item.title}}</a><br>
+              <span class="text-success">Price: ${{item.price}}</span><br> 
+              <span class="text-warning">Shipping Cost: ${{item.ship_cost}}</span><br> 
+              <span class="text-light">Days Left: {{item.time}}</span><br> 
+          </td>
+          </tr>
+          
+          </table>
+<br>
+
+      <div class="text-center ">
+          <button type="button" 
+          [class.d-none]="!show_more || !(similar_list.length>5)"
+          (click)="moreClick()" class="btn btn-sm btn-default btn-dark " >
+              Show More                        
+          </button>
+          <button type="button" 
+          [class.d-none]="show_more || !(similar_list.length>5)"
+          (click)="moreClick()"class="btn btn-sm btn-default btn-dark" >
+              Show Less                        
+          </button>
+        </div>
+
+</ng-template>

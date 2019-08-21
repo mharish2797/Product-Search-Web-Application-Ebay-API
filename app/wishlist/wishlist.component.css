@@ -1,0 +1,31 @@
+
+.all_table tr:hover{
+    opacity: 0.7;
+}
+
+.all_table{
+    width:80%;
+    margin: 0 auto;
+    margin-top:10px;
+}
+
+.title:hover{
+    text-decoration: underline;
+    cursor: text;
+}
+
+.orange{
+    color:peru;
+}
+
+.grayer{
+    background-color: lightgray;
+}
+
+.don:hover{
+    text-decoration: none ;
+}
+.don{
+    text-decoration: none;
+
+}

@@ -1,0 +1,13 @@
+
+.all_table{
+    width:100%;
+    margin: 0 auto;
+    margin-top:10px;
+}
+
+td a, td a:hover,td a :visited{
+    color: teal;
+    text-decoration: none;
+    cursor: pointer
+}
+

@@ -1,0 +1,56 @@
+
+.all_table tr:hover{
+    opacity: 0.7;
+}
+.grayer{
+    background-color: lightgray;
+}
+
+.all_table{
+    width:80%;
+    margin: 0 auto;
+    margin-top:10px;
+}
+
+.title:hover{
+    text-decoration: underline;
+    cursor: text;
+}
+
+.orange{
+    color:peru;
+}
+
+::ng-deep .pagination .page-item .page-link {
+    border-radius: 0 !important;
+  }
+ 
+  ::ng-deep .pagination .page-link {
+    border-top-style: none !important;
+    border-bottom-style: none !important;
+    border-left-style: none !important;
+    border-right-style: none !important;
+    background-color:white !important;
+    color: black !important;
+  }
+  ::ng-deep .pagination .page-link:hover {
+    text-decoration: underline;
+  }
+
+ 
+  ::ng-deep .pagination li.active a {
+    background-color: black !important;
+    color: white !important;
+}
+
+::ng-deep .pagination li.disabled a {
+    opacity: 0.4 !important;
+}
+
+.don:hover{
+    text-decoration: none ;
+}
+.don{
+    text-decoration: none;
+
+}

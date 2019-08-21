@@ -1,0 +1,39 @@
+.all_table{
+    width:75%;
+    margin: 0 auto;
+    margin-top:10px;
+}
+.orange{
+  color:peru;
+}
+
+
+::ng-deep .nav-pills a.nav-link.active, 
+::ng-deep .nav-pills .show > a.nav-link  {
+    color: #fff;
+    background-color: black;
+}
+
+::ng-deep a  {
+    color: black
+  }
+
+  ::ng-deep a:hover{
+    color: black;
+    border: 1px solid black;
+  }
+
+  .blacker{
+    background-color: black;
+    color:white;
+  }
+  .whiter{
+    background-color: white;
+    color:black;
+  }
+  @media (max-width: 769px){
+    ::ng-deep .nav-pills a.nav-link{
+      padding-left: 4px;
+      padding-right: 4px
+    }
+  }
