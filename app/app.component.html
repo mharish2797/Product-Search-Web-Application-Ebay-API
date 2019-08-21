@@ -1,0 +1,170 @@
+<div class="container element rounded ">
+  <br>
+  <h2 style="text-align:center; font-weight: 200; margin: 0px;"> <b>Product Search </b></h2>
+  <br>
+<form [formGroup]="psform">
+  
+  <div class="form-group  row mb-3">
+      <label class="col-md-2 col-xs-4 col-form-label col-sm-2 required offset-sm-2">Keyword</label>
+      <div class="col-xs-5 col-md-5 col-sm-7 ">
+          <input formControlName="keyword"
+          required pattern="\s*\S+[\s*\S+]*\s*"
+          [class.is-invalid]="keyword.invalid && keyword.touched"  
+          type=text class="form-control" placeholder="Enter Product Name (eg. iPhone 8)">
+      </div>
+  </div>
+  <div class="form-group  row mb-3" [class.d-none]="keyword.valid || keyword.untouched">
+      <div class="col-sm-10 offset-sm-4 ">
+      <small class="text-danger"> Please enter a keyword. </small>     
+    </div>
+  </div>
+
+  <div class="form-group row mb-3">
+          <label class="col-2 col-form-label offset-sm-2">Category</label>
+          <div class="col-sm-5 col-md-2">
+                  <select formControlName="category" size=0 class="form-control" >
+                        <option *ngFor="let item of category_list"> {{item}} </option>
+                  </select>
+          </div>
+  </div> 
+  
+  <div class="form-group row mb-3" formGroupName="condition">
+          <label class="col-2 col-xs-4 col-form-label offset-sm-2">Condition</label>
+          <div class="col-md-5 col-sm-7 pt-2">
+              <div class="form-check form-check-inline">
+              <input type=checkbox formControlName="cnew"
+              class="rounded form-check-input" > New</div>
+              <div class="form-check form-check-inline">
+              <input type=checkbox formControlName="cused"
+              class="rounded form-check-input"> Used</div>
+              <div class="form-check form-check-inline">
+              <input type=checkbox formControlName="cunspecified" class="rounded form-check-input" > Unspecified</div>
+          </div>
+  </div>
+
+  <div class="form-group row mb-3" formGroupName="shipping">
+          <label class="col-sm-2 col-form-label offset-sm-2">Shipping Options</label>
+          <div class="col-md-5 col-sm-7 pt-2">
+              <div class="form-check form-check-inline">
+              <input type=checkbox formControlName="slocal"
+              class="rounded form-check-input"> Local Pickup</div>
+              <div class="form-check form-check-inline">
+              <input type=checkbox formControlName="sship" class="rounded form-check-input" > Free Shipping </div>
+          </div>
+  </div>
+
+  <div class="form-group row mb-3">
+          <label class="col-sm-2 col-form-label offset-sm-2">Distance (Miles)</label>
+          <div class=" col-xs-5 col-md-2 col-sm-4 ">
+                  <input formControlName="miles" 
+                  pattern="\d*" [class.is-invalid]="miles.invalid" 
+
+                  type=number min=0 placeholder="10" size=7 class="form-control">
+          </div>
+  </div>
+
+<div class="form-group  row mb-3"  [class.d-none]="miles.valid">
+    <div class="col-sm-10 offset-sm-4 ">
+    <small class="text-danger"> Please enter only numbers. </small>     
+     </div>
+    </div>
+
+  <div class="form-group row mb-1">
+          <label class="col-sm-2 col-form-label required offset-sm-2">From</label>
+          <div class="col-sm-5 pt-2 ">
+              <input formControlName="zip" type=radio 
+              (change)="zip_clear();"
+              value='1' class="change rounded" > Current Location      
+          </div>
+  </div>
+
+  <div class="form-group row mt-0 mb-1">
+          <div class="col-sm-10 offset-sm-4 ">
+              <input type=radio formControlName="zip"
+              (change)="zipcode.enable()"
+              value='2' class="change rounded" > Other. Please specify zip code:
+          </div>
+  </div>
+
+  <div class="form-group row mb-3">
+          <div class="col-sm-5 offset-sm-4">
+            <input pattern="\d{5}" type=text class="form-control" size=38 
+              [class.is-invalid]="(zip.value=='2') && zipcode.value.trim()=='' && zipcode.touched" 
+              [required]="zip.value=='2'" formControlName="zipcode"
+              matInput [matAutocomplete]="auto" 
+              (keyup)="zip_autocomplete();" >
+             
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of option_list" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+          </div>
+  </div>
+  <div class="form-group  row mb-3" 
+  [class.d-none]="(zip.value=='1') || (zipcode.value.trim()!='' || zipcode.untouched)">
+    <div class="col-sm-10 offset-sm-4 ">
+    <small class="text-danger"> Please enter a zipcode. </small>     
+     </div>
+    </div>
+  <div class="form-group row mb-3">
+          <div class=" col-sm-5 offset-sm-2">
+              <button type="button" name=submit (click)="on_search();"
+              [disabled]="keyword.invalid || ((zip.value=='2') && zipcode.invalid)"
+               class="btn btn-sm btn-default btn-light" >
+              <i class="material-icons align-middle ">search</i> Search
+              </button>
+              <button type="button" name=clear
+              (click)="on_clear();"
+              class="ml-4 btn btn-sm btn-light">
+                      <i class="material-icons align-middle">clear_all</i> Clear
+
+              </button>
+          </div>
+  </div>
+</form>
+
+</div>
+<br>
+  
+  <div  *ngIf="!flag_list['detail']" >
+<ngb-tabset type="pills" [justify]="center" [activeId]="flag_list['cur_tab']" (tabChange)="tctoggle()">
+    <ngb-tab title="Results" id=id_res>
+      <ng-template ngbTabContent *ngIf="flag_list['result']">
+        <div >
+            <br>
+          <app-list-item >
+            </app-list-item>     
+          </div> </ng-template>
+
+    </ngb-tab>
+    <ngb-tab title="Wish List" id=id_wish>
+      <ng-template ngbTabContent>
+          <div >
+              <br>
+          <app-wishlist>
+            </app-wishlist>   
+          
+          </div>       
+        </ng-template>
+      </ngb-tab>
+  
+    </ngb-tabset>
+  </div>
+
+  <div *ngIf="flag_list['detail']">
+    <div >
+      <app-detailed>
+      </app-detailed>
+    </div>
+     </div>
+<br>
+<div class="d-flex justify-content-center">
+     <div class="progress" [class.d-none]="hide_progress" style="width:80%" >
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+         style="width:50%"
+         
+         ></div>
+        </div>
+      </div>
+<router-outlet></router-outlet>
