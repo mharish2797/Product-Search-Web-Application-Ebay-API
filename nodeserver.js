@@ -19,7 +19,7 @@ const allowedExt = [
 
 app.get('/link_autocomplete',function(req,res){
     var zipcode=req.query.zipcode;
-    request.get({ url: "http://api.geonames.org/postalCodeSearchJSON?postalcode_startsWith="+req.query.zipcode+"&username=mharish2797&country=US&maxRows=5"},      function(error, response, body) { 
+    request.get({ url: "http://api.geonames.org/postalCodeSearchJSON?postalcode_startsWith="+req.query.zipcode+"&username=username&country=US&maxRows=5"},      function(error, response, body) { 
         if (!error && response.statusCode == 200) { 
             res.status(200).send(body); 
            }
@@ -40,7 +40,7 @@ app.get('/link_all_items',function(req,res){
     var zipcode=req.query.zipcode;
     var slocal=req.query.slocal=="true";
     var sship=req.query.sship=="true";
-    var turl="http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=HarishMo-products-PRD-916db7c91-f1c779f2&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&paginationInput.entriesPerPage=50";
+    var turl="http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=appname&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&paginationInput.entriesPerPage=50";
     turl+="&keywords="+keyword;
     if(parseInt(category)>0) turl+="&categoryId="+category;
     turl+="&buyerPostalCode="+zipcode;
@@ -75,7 +75,7 @@ app.get('/link_all_items',function(req,res){
 
 app.get('/link_single_item',function(req,res){
     
-    var giveurl="http://open.api.ebay.com/shopping?callname=GetSingleItem&responseencoding=JSON&appid=HarishMo-products-PRD-916db7c91-f1c779f2&siteid=0&version=967&ItemID=";
+    var giveurl="http://open.api.ebay.com/shopping?callname=GetSingleItem&responseencoding=JSON&appid=appname&siteid=0&version=967&ItemID=";
     giveurl+=req.query.item_id+"&IncludeSelector=Description,Details,ItemSpecifics";
     request.get({ url: giveurl}, function(error, response, body) { 
         if (!error && response.statusCode == 200) { 
@@ -90,8 +90,8 @@ app.get('/link_single_item',function(req,res){
 
 app.get('/link_photos',function(req,res){
 
-    var search_engine_id="012752511452745175918:kwpqhy9cjhm"
-    var api_key="AIzaSyDJxiN4qMDu06i8JAjYW9Sl3ggL-WUdTCY"
+    var search_engine_id=""
+    var api_key=""
     var giveurl="https://www.googleapis.com/customsearch/v1?q="+encodeURI(req.query.item_id)+"&cx="+search_engine_id+"&imgSize=huge&imgType=news&num=8&searchType=image&key="+api_key;
     request.get({ url: giveurl}, function(error, response, body) { 
         if (!error && response.statusCode == 200) { 
@@ -107,7 +107,7 @@ app.get('/link_photos',function(req,res){
 
 app.get('/link_similar_item',function(req,res){
 
-    var giveurl="http://svcs.ebay.com/MerchandisingService?OPERATION-NAME=getSimilarItems&SERVICE-NAME=MerchandisingService&SERVICE-VERSION=1.1.0&CONSUMER-ID=HarishMo-products-PRD-916db7c91-f1c779f2&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&itemId=";
+    var giveurl="http://svcs.ebay.com/MerchandisingService?OPERATION-NAME=getSimilarItems&SERVICE-NAME=MerchandisingService&SERVICE-VERSION=1.1.0&CONSUMER-ID=appname&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&itemId=";
     giveurl+=req.query.item_id+"&maxResults=20";
     request.get({ url: giveurl}, function(error, response, body) { 
         if (!error && response.statusCode == 200) { 
